@@ -19,12 +19,12 @@ timezone: Europe/Bucharest
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: ghe0's blog                          # the main title
+title: ghe0's blog             # the main title
 
-tagline: for coding and stuff   # it will display as the sub-title
+tagline: where technology meets art   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  You will find here a lot of nerdy stuff. Mostly open source and coding. GL&HF!
+  The personal blog of Gheorghe Ungureanu.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://blog.gheo.tech'
@@ -71,7 +71,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: dark  # [light|dark]
+theme_mode: # [light|dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -81,7 +81,7 @@ theme_mode: dark  # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: assets/img/avatar.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
