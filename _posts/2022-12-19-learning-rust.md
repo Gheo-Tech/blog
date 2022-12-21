@@ -1,6 +1,6 @@
 ---
 title: Learning Rust
-date: 2022-12-20 07:17:09 +0200
+date: 2022-12-19 07:17:09 +0200
 categories: [Coding, Rust]
 tags: [coding, rust]
 author: ghe0
@@ -11,7 +11,7 @@ image: /assets/img/evil-ferris-on-rocks.jpg
 
 ## A language for masochists
 
-I've personally had an amazing experience coding in Rust. It is by far the most exciting language I worked with. This does not mean that your experience will be similar. First, Rust should not be the first programming language you learn. If you are new to coding, you should start with a language friendlier for noobs, [like Go](https://go.dev/tour/welcome/1). 
+I've personally had an amazing experience coding in Rust. It is by far the most exciting language I worked with. This does not mean that your experience will be similar. First, Rust should not be the first programming language you learn. If you are new to coding, [try Go instead](/posts/go-king-of-enterprise). 
 
 Before starting, it's important to know that Rust mandates a specific degree of masochism. Working with Rust is like playing Dark Souls: painful but rewarding. If you don't know what masochism is, or have never played Dark Souls, think about Rust as a new dimension of life that you are about to experience...
 
@@ -43,18 +43,18 @@ In the meantime, set up an IDE that you can use to actually test the code. The l
 
 If you like vim, here is [my IDE](https://codeberg.org/gunix/nvim-rust-ide).
 
+## Find friends!
+
+One very important aspect of software is the community. You will not get too far on your own. You should find a community where you feel at home and share your opinions with other people. At this point, Rust communities can be found on every social platform.
+
+The most active platform for Rust is Discord. There are multiple servers (with lots of channels each) and voice chat + scharescreen is also popular in some of the Discord communities. Overall, Discord is a very good place to start to make new crab friends.
+
 ## Rustlings
 
 ![Desktop View](/assets/img/happy-ferris.jpg){: .w-50 .right}
 [Rustlings](https://github.com/rust-lang/rustlings) is an amazing Rust game that will take you through all the essentials. It's a mandatory tutorial for anybody that gets into the language. Remember how I said you are dead without a compiler? Your compiler will not work with Rustlings, but in this case it is fine. It will force you to read through the docs and understand what is actually happening. The compiler gives you so much good advice that it actually prevents you from learning Rust, so just go through Rustlings. You will enjoy it.
 
 If you got so far, it means you already started to tame the beast... At this point, the Crab will appear a lot friendlier than before. Now it's time to use the Crab to your advantage.
-
-## Find friends!
-
-One very important aspect of software is the community. You will not get too far on your own. You should find a community where you feel at home and share your opinions with other people. At this point, Rust communities can be found on every social platform.
-
-The most active platform for Rust is Discord. There are multiple servers (with lots of channels each) and voice chat + scharescreen is also popular in some of the Discord communities. Overall, Discord is a very good place to start to make new crab friends.
 
 # Use the crab
 
