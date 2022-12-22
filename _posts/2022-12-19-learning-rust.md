@@ -36,12 +36,13 @@ Assuming you already know another programming language (doesn't matter which), y
 
 If you got this far, it means you decided that you like Rust or that you like my blog. Either way, you have my respect. From now on, [the rust book](https://doc.rust-lang.org/stable/book/) shall be your Bible. You have to live and breathe this book. Start your first read, which should be a confusing but enjoyable experience. You will have to read this book a lot of times...
 
+![Desktop View](/assets/img/ferris-eating-ps.jpg){: .w-50 .left}
 In the meantime, set up an IDE that you can use to actually test the code. The language as an exceptionally powerful compiler (it is truly a miracle), so make sure you take advantage of it. You can use VS Code, Vim, Emacs or whatever else you prefer, just make sure the rust-analyzer works and your errors get highlighted properly.
 
 > Without the compiler, you will experience repeated brutal death. Coding in Rust without the compiler is like playing Dark Souls with a broken controller.
 {:.prompt-danger}
 
-If you like vim, here is [my IDE](https://codeberg.org/gunix/nvim-rust-ide).
+If you like vim, here is [my IDE](https://github.com/ghe0/nvim-rust-ide).
 
 ## Find friends!
 
