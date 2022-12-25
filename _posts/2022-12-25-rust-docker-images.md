@@ -2,7 +2,7 @@
 title: Rust Docker Images
 date: 2022-12-25 01:32:51 +0200
 categories: [Coding, Rust]
-tags: [coding, rust]
+tags: [coding, rust, docker]
 author: ghe0
 image: /assets/img/ferris-peaceful-container.jpg
 ---
