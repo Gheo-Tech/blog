@@ -6,10 +6,11 @@ tags: [coding, rust, docker]
 author: ghe0
 image: /assets/img/ferris-peaceful-container.jpg
 ---
-# Docker images for Rust
+# Rust containers
 
 There is a high chance you will need to run your Rust apps on cloud. In this case, you want the docker image to be as small as possible. The examples you will find will allow you to create images that are 50 MB or even 80 MB big, but you can get that down to 10 MB or less for simple web servers or gRPC servers.
 
+I have to mention that small images will also help your Kubernetes cluster scale better. I have to mention it, because the Kubernetes hype generates clicks and I want my blog to do well. Thank you for the understanding!
 
 # x86_64-unknown-linux-musl
 
@@ -26,7 +27,7 @@ $ cargo build --release --target=x86_64-unknown-linux-musl
 # … bla bla compiling stuff…
 ```
 
-This will compile a static binary that will get saved to `target/x86_64-unknown-linux-musl/release/BINARY_NAME`. In comparison with the normal binary you get when compiling just without musl, you will see there are no extra dependencies:
+This will compile a static binary that will get saved to `target/x86_64-unknown-linux-musl/release/BINARY_NAME`. In comparison with the binary you get when compiling without musl, you will see there are no extra dependencies:
 
 ```console
 # binary compiled with cargo build --release
@@ -54,7 +55,7 @@ $ export TARGET_CC=x86_64-linux-musl-gcc
 $ export RUSTFLAGS="-C linker=x86_64-linux-musl-gcc"
 ```
 
-# reduce binary size
+# Reducing Binary Size
 
 ![Desktop View](/assets/img/rick-runs-from-big-crab.jpg){: .w-50 }
 <center><b>QUICK, MORTY, ADD THIS AT THE END OF YOUR CARGO TOML!!!</b></center>
@@ -85,11 +86,11 @@ What you just did there is you removed debug symbols and also forced the compile
 > If you are hunting a random bug, you might actually need debug symbols. This is however not something that you should do in production. It’s best to perform testing and debugging on your local machine, using tools and binaries optimized for this purpose.
 {: .prompt-warning } 
 
-If you are serious about rust, you should read more about [rustc](https://doc.rust-lang.org/rustc/what-is-rustc.html). If you don't, you will end up like Rick: either desperately running from a crab that is too big or desperately running after a crab that is too small. Rust gives you a choise. Use it wisely!
+If you are serious about rust, you should read more about [rustc](https://doc.rust-lang.org/rustc/what-is-rustc.html). If you don't, you will end up like Rick: either desperately running from a crab that is too big or desperately running after a crab that is too small. Rust gives you a choice. Use it wisely!
 
-# building a docker image
+# Building a Docker Image
 
-Now that you have a small binary that is statically, you can just use `from scratch` as your base docker image and you will get a very small image. This is how your docker file can look if you like to compile on the host:
+Now that you have a small binary that is statically linked, you can just use `from scratch` as your base, in order to create a docker image without overhead. This is how your docker file can look, if you like to compile on the host:
 
 ```Dockerfile
 from scratch
@@ -112,13 +113,13 @@ docker build \
   .tmp/
 ```
 
-## compiling in docker
+## Compiling in Docker
 
-Building in docker will have some delays, since you must choose one of these two poisons:
-1. add `~/.cargo` and `./target` to the build image OR
+Compiling in docker will have some delays, since you must choose one of these two poisons:
+1. add `~/.cargo` and `./target` to the build image
 2. just download and compile all of the crates on every build
 
-Neither will be very fun, but leave usualy love their [multi-stage builds](https://docs.docker.com/build/building/multi-stage/) so here is an example:
+Neither will be very fun, but people usually love their [multi-stage builds](https://docs.docker.com/build/building/multi-stage/) so here is an example:
 ```Dockerfile
 FROM rust:latest AS builder
 WORKDIR /code
@@ -134,17 +135,17 @@ COPY --from=builder /code/target/x86_64-unknown-linux-musl/release/my_crab /my_c
 CMD [ "/my_crab" ]
 ```
 
-No matter if compiling on your machine or in docker, the image of a simple actix web server should not be bigger than 4 MB. Speaking of actix, let’s look at a small detail…
+No matter if compiling on your machine or in docker, the image of a simple actix web server should not be bigger than 4 MB. Speaking of actix...
 
 # [actix-rs](https://actix.rs/) and [tonic](https://docs.rs/tonic/latest/tonic/)
 
 ![Desktop View](/assets/img/docker-carries-ship.jpg){: .w-50 .left }
 
-There is a high chance you got here after you tried [the actix docker example](https://github.com/actix/examples/tree/master/docker). That is not what you want, because the image is too big. Their binary is 9.6 MB and the image they are using for runtime is `debian:bullseye-slim`, which has 80.5 MB. At the end you will end up with an image bigger than 90 MB.
+There is a high chance you got here after you tried [the actix docker example](https://github.com/actix/examples/tree/master/docker). That is not what you want, because the image is too big. Their binary is 9.6 MB and the image they are using for runtime is `debian:bullseye-slim`, which is 80.5 MB. At the end you will end up with an image bigger than 90 MB.
 
 That is not a whale carrying a small container that contains a crab. That is a whale that carries an entire ship that hunts for crabs in the ocean. Lucky enough, we can apply what we learned in previous chapters to create a smaller image and successfully fail.
 
-Since actix by default uses the OpenSSL library of the OS, you will need to add the `rustls` feature to Cargo.toml in order to allow it to build to a statically linked binary. If you don't your binary will work on your system but will crash with `from scratch` image and it will also fail `with alpine:edge`.
+Since actix by default uses the OpenSSL library of the OS, you will need to add the `rustls` feature to Cargo.toml in order to allow it to build to a statically linked binary. If you don't, your binary will work on your system but will crash with a `from scratch` base and it will also crash with a `from alpine:edge` base.
 
 ```toml
 actix-web = { version = "4.2.1", features = ["rustls"] }
@@ -153,3 +154,7 @@ actix-web = { version = "4.2.1", features = ["rustls"] }
 Tonic uses [rustls](https://docs.rs/rustls/latest/rustls/) by default so your MUSL binary will just work.
 
 As long as you are sure your binary uses rustls, you should not have any issues running actix or tonic in containers.
+
+# Kubernetes
+
+Also, Kubernetes. Almost forgot.
